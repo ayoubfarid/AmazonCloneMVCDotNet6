@@ -1,0 +1,35 @@
+﻿@model AmazonCloneMVC.Models.User
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <form asp-controller="Auth" asp-action="Login" method="post" class="col-md-4 offset-md-4">
+            <div class="form-group">
+                <label for="email">Login:</label>
+                <input type="text" id="email" name="email" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required />
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-6">
+                    <button  type="submit" class="btn btn-warning  btn-block">Se Connecter</button>
+                </div>
+            </div>
+
+            
+        </form>
+  </div>
+</body>
+</html>

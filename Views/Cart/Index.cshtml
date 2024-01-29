@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AmazonCloneMVC.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    // Retrieve objects from ViewBag
+    var products = ViewBag.Products as List<Product>;
+}
+
+<div class="row flex  justify-content-between mt-5">
+    <div class="col-10">
+        <h1>Card Listing</h1>
+    </div>
+    <div class="col">
+        <form>
+            <a class="btn btn-warning" href="@Url.Action("Logout", "Auth")">Déconnexion</a>
+        </form>
+    </div>
+
+</div>
+
+
+<div class="col-xl-9 mt-5">
+    <div class="container">
+        <div class="row">
+            @if (products != null)
+            {
+                  @foreach (var product in products)
+            {
+                <div class="col-md-4">
+                    <div class="card m-1 " style="min-height:450px;max-height:450px;">
+                        <img src="@Url.Content(@product.Image) " style="max-width:100%;min-height:50%;margin:auto" alt="Product Image" class="img-fluid mt-2" />
+
+                        <div class="card-body flex-column align-items-center justify-content-center ">
+                            <h5 class="card-title " style="font-weight:bold">@product.Name</h5>
+                            <p class="card-text" style="font-size:14px;">
+                                @if (!string.IsNullOrEmpty(product.Description) && product.Description.Length > 60)
+                                {
+                                    @product.Description.Substring(0, 60)
+                                }
+                                else
+                                {
+                                    @product.Description
+                                }
+                            </p>
+                            <p class="card-text">Price: $@product.Price</p>
+                           
+                            <a style="width:100%" href="Product/Details/@product.ProductID" class="btn btn-warning ">View Details</a>
+
+                            <form  asp-action="RemoveProd">
+                                <input hidden type="text" name="ProductId" value="@product.ProductID" />
+                                <button style="width:100%" type="submit" class="btn btn-outline-danger mt-2 "> Remove </button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            }
+          
+        </div>
+    </div>
+</div>
